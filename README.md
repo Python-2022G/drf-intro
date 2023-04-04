@@ -8,6 +8,10 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+```bash
+python manage.py migrate
+```
+
 ## endpoints
 
 ### GET /api/add?x=1&y=2

@@ -10,7 +10,7 @@ def hi(request: Request) -> Response:
     
     name = params.get('name', '')
 
-    return Response(f'hi, {name}')
+    return Response({'name': name})
 
 
 @api_view
