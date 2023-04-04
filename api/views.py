@@ -25,7 +25,13 @@ def addition(request: Request) -> Response:
         params = request.query_params
         a = params.get('a', 0)
         b = params.get('b', 0)
-        return Response({'result': int(a) + int(b)}, status=status.HTTP_200_OK)
+
+    elif request.method == 'POST':
+        params = request.data
+        a = params.get('a', 0)
+        b = params.get('b', 0)
+    
+    return Response({'result': int(a) + int(b)}, status=status.HTTP_200_OK)
     
 
 @api_view(['GET'])
@@ -35,7 +41,13 @@ def subtraction(request: Request) -> Response:
         params = request.query_params
         a = params.get('a', 0)
         b = params.get('b', 0)
-        return Response({'result': int(a) - int(b)}, status=status.HTTP_200_OK)
+
+    elif request.method == 'POST':
+        params = request.data
+        a = params.get('a', 0)
+        b = params.get('b', 0)
+
+    return Response({'result': int(a) - int(b)}, status=status.HTTP_200_OK)
     
 
 @api_view(['GET'])
@@ -45,7 +57,13 @@ def multiplication(request: Request) -> Response:
         params = request.query_params
         a = params.get('a', 0)
         b = params.get('b', 0)
-        return Response({'result': int(a) * int(b)}, status=status.HTTP_200_OK)
+    
+    elif request.method == 'POST':
+        params = request.data
+        a = params.get('a', 0)
+        b = params.get('b', 0)
+
+    return Response({'result': int(a) * int(b)}, status=status.HTTP_200_OK)
     
 
 @api_view(['GET'])
@@ -55,13 +73,18 @@ def division(request: Request) -> Response:
         params = request.query_params
         a = int(params.get('a', 0))
         b = params.get('b', None)
+    
+    elif request.method == 'POST':
+        params = request.data
+        a = int(params.get('a', 0))
+        b = params.get('b', None)
 
-        if b is None:
-            return Response({'error': 'b is required'})
-        else:
-            b = int(b)
-        
-        if b == 0:
-            return Response({'error': 'division by zero'})
-        
-        return Response({'result': a / b}, status=status.HTTP_200_OK)
+    if b is None:
+        return Response({'error': 'b is required'})
+    else:
+        b = int(b)
+    
+    if b == 0:
+        return Response({'error': 'division by zero'})
+    
+    return Response({'result': a / b}, status=status.HTTP_200_OK)
