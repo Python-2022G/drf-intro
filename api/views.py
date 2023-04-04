@@ -1,6 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
+from rest_framework import status
 
 
 @api_view(['GET', 'POST'])
@@ -14,7 +15,7 @@ def hi(request: Request) -> Response:
         params = request.data
         name = params.get('name', '')
 
-    return Response({'name': name})
+    return Response({'name': name}, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
@@ -24,7 +25,7 @@ def addition(request: Request) -> Response:
         params = request.query_params
         a = params.get('a', 0)
         b = params.get('b', 0)
-        return Response({'result': int(a) + int(b)})
+        return Response({'result': int(a) + int(b)}, status=status.HTTP_200_OK)
     
 
 @api_view(['GET'])
@@ -34,7 +35,7 @@ def subtraction(request: Request) -> Response:
         params = request.query_params
         a = params.get('a', 0)
         b = params.get('b', 0)
-        return Response({'result': int(a) - int(b)})
+        return Response({'result': int(a) - int(b)}, status=status.HTTP_200_OK)
     
 
 @api_view(['GET'])
@@ -44,7 +45,7 @@ def multiplication(request: Request) -> Response:
         params = request.query_params
         a = params.get('a', 0)
         b = params.get('b', 0)
-        return Response({'result': int(a) * int(b)})
+        return Response({'result': int(a) * int(b)}, status=status.HTTP_200_OK)
     
 
 @api_view(['GET'])
@@ -63,4 +64,4 @@ def division(request: Request) -> Response:
         if b == 0:
             return Response({'error': 'division by zero'})
         
-        return Response({'result': a / b})
+        return Response({'result': a / b}, status=status.HTTP_200_OK)
