@@ -3,12 +3,16 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def hi(request: Request) -> Response:
     '''hi view'''
-    params = request.query_params
+    if request.method == 'GET':
+        params = request.query_params
+        name = params.get('name', '')
     
-    name = params.get('name', '')
+    elif request.method == 'POST':
+        params = request.data
+        name = params.get('name', '')
 
     return Response({'name': name})
 
