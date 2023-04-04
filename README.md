@@ -33,3 +33,11 @@ pip install -r requirements.txt
   "result": 2
 }
 ```
+
+### /api/divide?x=1&y=2
+
+```json
+{
+  "result": 0.5
+}
+```
