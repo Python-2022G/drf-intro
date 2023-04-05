@@ -7,7 +7,14 @@ from rest_framework import status
 @api_view(['GET', 'POST'])
 def hi(request: Request) -> Response:
     '''hi view'''
-    pass
+    if request.method == 'GET':
+        query_params = request.query_params
+        name = query_params.get('name', '')
+
+    elif request.method == 'POST':
+        name = request.data.get('name', '')
+
+    return Response({'hi': name}, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
