@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (
-    hi,
+    HiView,
     addition,
     subtraction,
     multiplication,
@@ -8,7 +8,7 @@ from .views import (
 )
 
 urlpatterns = [
-    path('hi', hi),
+    path('hi', HiView.as_view()),
     path('addition', addition),
     path('subtraction', subtraction),
     path('multiplication', multiplication),

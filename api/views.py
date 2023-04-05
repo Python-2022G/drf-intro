@@ -1,20 +1,23 @@
 from rest_framework.decorators import api_view
+from rest_framework.views import APIView
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import status
 
 
-@api_view(['GET', 'POST'])
-def hi(request: Request) -> Response:
-    '''hi view'''
-    if request.method == 'GET':
+class HiView(APIView):
+    def get(sefl, request: Request) -> Response:
+        '''hi view'''
         query_params = request.query_params
         name = query_params.get('name', '')
 
-    elif request.method == 'POST':
+        return Response({'hi': name}, status=status.HTTP_200_OK)
+
+    def post(self, request: Request) -> Response:
         name = request.data.get('name', '')
 
-    return Response({'hi': name}, status=status.HTTP_200_OK)
+        return Response({'hi': name}, status=status.HTTP_200_OK)
+    
 
 
 @api_view(['GET'])
