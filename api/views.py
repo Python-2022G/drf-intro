@@ -35,7 +35,21 @@ def multiplication(request: Request) -> Response:
     pass
     
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def division(request: Request) -> Response:
     '''divide two number'''
-    pass
+    if request.method == "GET":
+        query_params = request.query_params
+        x = query_params.get('x', 0)
+        y = query_params.get('y')
+    elif request.method == 'POST':
+        data = request.data
+        x = data.get('a', 0)
+        y = data.get('b')
+    
+    if y is None:
+        return Response({'warning': 'y is required'}, status=status.HTTP_400_BAD_REQUEST)
+    elif y == '0':
+        return Response({'error': 'cant divide by 0'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+    return Response({'result': int(x) / int(y)}, status=status.HTTP_200_OK)
